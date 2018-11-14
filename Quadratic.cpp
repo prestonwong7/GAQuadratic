@@ -6,17 +6,19 @@ using namespace std;
 
 int getQuadraticFormula();
 int initialPopulation();
-int fitnessFunction();
+int calculateFitness(int population[]);
 int selection();
 int mutation();
 
 int main() {
-	int fitness = getQuadraticFormula();
-	initialPopulation();
-	fitnessFunction();
+	//int fitness = getQuadraticFormula();
+	int initialPopulation[4] = {1, 2, 3, 4};
+	int fitness[4] = { 0,0,0,0 };
+	//initialPopulation();
+	calculateFitness(initialPopulation);
 	while (1) {
 		getQuadraticFormula();
-		fitnessFunction();
+		calculateFitness();
 		selection();
 		mutation();
 	}
@@ -24,29 +26,20 @@ int main() {
 	return 0;
 }
 
-int getQuadraticFormula() {
+int getQuadraticFormula(int x) {
 	int a = 1;
-	int b = 1;
-	int c = 3;
-	int x = 2;
+	int b = 2;
+	int c = 1;
 	int formulaResult = a * pow(x, 2) + b * x + c;
-	if (formulaResult > 0) {
-		x--;
-	}
-	if (formulaResult < 0) {
-		x++;
-	}
+
 	return formulaResult;
 }
 
-int initialPopulation()
+int calculateFitness(int x)
 {
-	return 0;
-}
+	int fitness = getQuadraticFormula(x);
 
-int fitnessFunction()
-{
-	return 0;
+	return fitness;
 }
 
 int selection()

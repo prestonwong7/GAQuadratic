@@ -4,17 +4,9 @@
 
 class Quadratic
 {
-public:
-	void Population();
-	int FitnessScore();
-	int Selection();
-	int CrossOver();
-	int Mutation();
-
 private:
-	int createPopulation();
-	int getFitnessScore();
-	int getSelection();
+	int calculateFitness(int population[]);
+	int selection();
 	int getQuadraticFormula();
 	int fitness;
 };
