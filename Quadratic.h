@@ -5,9 +5,10 @@
 class Quadratic
 {
 private:
-	int calculateFitness(int population[]);
-	int selection();
-	int getQuadraticFormula();
+	int calculateFitness(int x);
+	int selection(int firstBestFit, int secondBestFit);
+	int getQuadraticFormula(int x);
+	int mutation();
 	int fitness;
 };
 
