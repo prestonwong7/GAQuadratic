@@ -1,4 +1,5 @@
 #include "Quadratic.h"
+#include <stdlib.h>
 #include <iostream>
 #include <cmath>
 #include <stdlib.h>
@@ -17,11 +18,13 @@ int mutation();
 // Selection, roulette wheel
 // Aneeling, e^-delta d / t, d = distance from 0, t = temp (basically mutation)
 
- 
 
+// How to get to 0?
 int main() {
+
 	int initialPopulation[4] = {1, 2, 3, 4};
-	int fitness[4] = {1,2,3,4};
+	int fitness[4] = { 0,0,0,0 };
+	//calculateFitness(initialPopulation[0]);
 	while (1) {
 		calculateFitness(initialPopulation);
 		int mostFit = findMostFit(fitness);
@@ -48,6 +51,7 @@ int getQuadraticFormula(int x) {
 	return formulaResult;
 }
 
+
 int selection(int mostFit, int secondMostFit)
 {
 	int child = (mostFit + secondMostFit) / 2;
@@ -64,21 +68,15 @@ int findMostFit(int fitness[]) {
 	return mostFit;
 }
 
-int findSecondMostFit(int fitness[]) {
-	int mostFit = fitness[0];
-	for (int i = 0; i < sizeof(fitness); i++) {
-		if (fitness[i] < mostFit) {
-			mostFit = fitness[i];
-		}
-	}
-	return mostFit;
-}
 
-int* crossover(int initialPopulation[]) {
-
-}
-
-int mutation()
+int Quadratic::mutation()
 {
+	// Set random from 1-100
+	// If select 1, random number
+	int randomNumber = rand() % 100 + 1;
+	if (randomNumber == 1) {
+		// Mutation occurs
+	}
 	return 0;
 }
+
