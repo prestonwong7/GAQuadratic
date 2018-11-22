@@ -23,15 +23,15 @@ int main() {
 
 	int population[4] = {1, 2, 3, 4}; // Random initial population
 	int fitness[4] = {0}; 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < (sizeof(population) / sizeof(population[0])); i++) {
 		fitness[i] = calculateFitness(population[i]);
 	}
-	//calculateFitness(initialPopulation[0]);
+
 	while (1) {
 		selection(population);
 		crossover(population);
 		mutation(population);
-		for (int i = 0; i < sizeof(population[0]); i++) {
+		for (int i = 0; i < (sizeof(population)/sizeof(population[0])); i++) {
 			calculateFitness(population[i]);
 			if (population[i] == 0) { // If the goal is 0
 				cout << "Answer: " << population[i] << endl;
@@ -61,12 +61,12 @@ double calculateFitness(double x)
 
 int* selection(int population[]) // Select individuals
 {
-	
+	return population;
 }
 
 int* crossover(int population[]) // Cross them over and produce
 {
-
+	return population;
 }
 
 int* mutation(int population[]) // This is where he says to use aneeling (once you actually used to the GA)
