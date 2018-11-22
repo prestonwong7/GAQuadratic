@@ -6,70 +6,70 @@
 using namespace std;
 
 
-int getQuadraticFormula(int);
-int* calculateFitness(int population[]);
-int selection(int, int);
+double getQuadraticFormula(double);
+double calculateFitness(double);
+int* selection(int[]);
 int* crossover(int[]);
-int mutation();
+int* mutation(int[]);
 
 // fitness can be recipriocal of the number
 // Local search
- // Population stays constant
+// Population stays constant
 // Selection, roulette wheel
 // Aneeling, e^-delta d / t, d = distance from 0, t = temp (basically mutation)
-
 
 // How to get to 0?
 int main() {
 
-	int initialPopulation[4] = {1, 2, 3, 4};
-	int fitness[4] = { 0,0,0,0 };
+	int population[4] = {1, 2, 3, 4}; // Random initial population
+	int fitness[4] = {0}; 
+	for (int i = 0; i < 4; i++) {
+		fitness[i] = calculateFitness(population[i]);
+	}
 	//calculateFitness(initialPopulation[0]);
 	while (1) {
-		calculateFitness(initialPopulation);
-		int mostFit = findMostFit(fitness);
-		int secondMostFit = findSecondMostFit(fitness);
-		selection(mostFit, secondMostFit);
-		crossover(initialPopulation);
-		mutation();
+		selection(population);
+		crossover(population);
+		mutation(population);
+		for (int i = 0; i < sizeof(population[0]); i++) {
+			calculateFitness(population[i]);
+			if (population[i] == 0) { // If the goal is 0
+				cout << "Answer: " << population[i] << endl;
+				cin.get();
+				return population[i];
+			}
+		}
 	}
 	cin.get();
 	return 0;
 }
 
-int* calculateFitness(int population[])
-{
-	int fitness = getQuadraticFormula();
-	return population;
-}
-
-int getQuadraticFormula(int x) {
+double getQuadraticFormula(double x) {
 	int a = 1;
 	int b = 2;
 	int c = 1;
-	int formulaResult = a * pow(x, 2) + b * x + c;
-	return formulaResult;
+	double result = a * pow(x, 2) + b * x + c;
+	return result;
 }
 
-
-int selection(int mostFit, int secondMostFit)
+double calculateFitness(double x)
 {
-	int child = (mostFit + secondMostFit) / 2;
-	return child;
+	double fitness = getQuadraticFormula(x);
+	fitness = 1 / fitness; // Getting recripocal gets fitness score
+	return fitness;
 }
 
-int findMostFit(int fitness[]) {
-	int mostFit = fitness[0];
-	for (int i = 0; i < sizeof(fitness); i++) {
-		if (fitness[i] < mostFit) {
-			mostFit = fitness[i];
-		}
-	}
-	return mostFit;
+int* selection(int population[]) // Select individuals
+{
+	
 }
 
+int* crossover(int population[]) // Cross them over and produce
+{
 
-int Quadratic::mutation()
+}
+
+int* mutation(int population[]) // This is where he says to use aneeling (once you actually used to the GA)
 {
 	// Set random from 1-100
 	// If select 1, random number
@@ -79,4 +79,16 @@ int Quadratic::mutation()
 	}
 	return 0;
 }
+
+int findMostFit(int fitness[]) {
+	int mostFit = fitness[0];
+	for (int i = 0; i < sizeof(fitness[0]); i++) {
+		if (fitness[i] < mostFit) {
+			mostFit = fitness[i];
+		}
+	}
+	return mostFit;
+}
+
+
 
