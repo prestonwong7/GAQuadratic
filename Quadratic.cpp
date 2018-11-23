@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <stdlib.h>
+#include <vector>
 using namespace std;
 
 
@@ -21,19 +22,24 @@ int* mutation(int[]);
 // How to get to 0?
 int main() {
 
-	int population[4] = {1, 2, 3, 4}; // Random initial population
+	int target = 0;
+	vector<int> population; // Random initial population
+	bool targetFound = false;
 	int fitness[4] = {0}; 
+
+
 	for (int i = 0; i < (sizeof(population) / sizeof(population[0])); i++) {
 		fitness[i] = calculateFitness(population[i]);
 	}
 
-	while (1) {
+	while (!targetFound) {
 		selection(population);
 		crossover(population);
 		mutation(population);
 		for (int i = 0; i < (sizeof(population)/sizeof(population[0])); i++) {
 			calculateFitness(population[i]);
-			if (population[i] == 0) { // If the goal is 0
+			if (population[i] == target) { // If the goal is 0
+				targetFound = true;
 				cout << "Answer: " << population[i] << endl;
 				cin.get();
 				return population[i];
@@ -50,6 +56,11 @@ double getQuadraticFormula(double x) {
 	int c = 1;
 	double result = a * pow(x, 2) + b * x + c;
 	return result;
+}
+
+double generateRandomIndividual() {
+	double individual = rand() % 200 - 100 ;
+	return individual;
 }
 
 double calculateFitness(double x)
